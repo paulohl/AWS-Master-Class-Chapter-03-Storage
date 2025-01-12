@@ -1,0 +1,67 @@
+<div>Figure 1 AWS Storage pattern decision matrix (AWS Blogs).</div><div>In this section, we will provide a deeper look into the storage patterns
+offered by AWS and analyze which use cases benefit from each storage
+solution. The objective is to ensure readers can make informed decisions
+when architecting their data management strategy in the AWS cloud.</div><h2 data-label="san-storage-area-network" class="ltx_title_subsection">SAN (Storage Area Network)</h2><ul><li><b>What it is</b> : SAN is a high-speed network that provides
+block-level storage to applications. The storage is accessed over
+dedicated high-performance networks, ensuring low latency and high
+throughput.</li><li><b>Best suited for</b> : Applications requiring high-performance
+storage, such as databases or transactional systems, which need
+low-latency, high-throughput access to storage.</li><li><b>AWS Services</b> :</li><li><b>Amazon Elastic Block Store (EBS)</b> provides block storage
+that can be attached to EC2 instances and used similarly to SAN
+storage in traditional on-premises setups.</li><li><b>Real-world application</b> : In financial institutions or
+e-commerce platforms, transactional databases require SAN-like
+performance to manage millions of requests per second. For example,<b>Amazon EBS</b> volumes are ideal for databases like MySQL,
+PostgreSQL, and MongoDB that require fast, reliable storage for
+intensive workloads.</li></ul><h2 data-label="nas-network-attached-storage" class="ltx_title_subsection">NAS (Network Attached
+Storage)</h2><ul><li><b>What it is</b> : NAS offers file-level access, enabling
+applications to share a centralized storage system. It is typically
+used for applications that require file sharing across different
+systems.</li><li><b>Best suited for</b> : Applications where multiple servers or users
+need access to shared files, such as content management systems, home
+directories, or web servers.</li><li><b>AWS Services</b> :</li><li><b>Amazon Elastic File System (EFS)</b> provides scalable file
+storage that can be accessed by multiple EC2 instances
+simultaneously. It offers high availability and durability, making
+it a preferred choice for enterprise applications.</li><li><b>Amazon FSx</b> supports Windows-based and Lustre file systems,
+ideal for users needing compatibility with existing NAS systems.</li><li><b>Real-world application</b> : Enterprises that run shared web
+servers, media workflows, or big data processing workloads benefit
+from <b>EFS</b> and <b>FSx</b> . For example, <b>Amazon EFS</b> is widely used in scenarios where applications need to access shared
+file systems from multiple availability zones.</li></ul><h2 data-label="object-storage" class="ltx_title_subsection">Object Storage</h2><ul><li><b>What it is</b> : Object storage manages unstructured data like
+media files, backups, or archives. Instead of using traditional file
+hierarchies, object storage uses metadata and unique identifiers,
+making it scalable and efficient for vast amounts of data.</li><li><b>Best suited for</b> : Applications where vast amounts of
+unstructured data, such as images, videos, logs, or backups, need to
+be stored and retrieved with scalability and durability.</li><li><b>AWS Services</b> :</li><li><b>Amazon S3 (Simple Storage Service)</b> is the foundational
+object storage service that provides unlimited scalability and
+99.999999999% durability. It is ideal for storing backups, data
+archives, and substantial amounts of unstructured data.</li><li><b>Amazon S3 Glacier</b> offers low-cost archival storage,
+designed for long-term data retention and retrieval at varying
+speeds.</li><li><b>Real-world application</b> : Media streaming services, where
+videos are stored in S3 for global distribution, benefit from object
+storage. Additionally, organizations that need to store backup and
+archival data long-term leverage <b>Amazon S3 Glacier</b> for
+low-cost storage solutions.</li></ul><h2 data-label="decision-making-criteria" class="ltx_title_subsection">Decision-Making Criteria</h2><div>Each of these AWS storage solutions plays a distinct role, and the
+decision to use SAN, NAS, or object storage should consider the
+following key criteria:</div><ol><li><b>Performance Requirements</b> :</li><li>High-performance applications like databases or virtual desktops
+benefit from <b>Amazon EBS</b> , which provides fast, low-latency
+access to block storage (SAN-like performance).</li><li>Applications needing frequent access to shared files across
+distributed instances perform best with <b>Amazon EFS</b> or<b>Amazon FSx</b> (NAS-like services).</li><li>Workloads requiring high durability and scalability but less
+frequent access to data, such as backups or media content delivery,
+are ideal candidates for <b>Amazon S3</b> or <b>S3 Glacier</b> .</li><li><b>Access Protocols</b> :</li><li>Applications using block storage protocols like iSCSI or Fibre
+Channel work well with <b>EBS</b> , as it supports these
+lower-level block interactions.</li><li>File-based protocols such as NFS or SMB are best served by<b>Amazon EFS</b> or <b>FSx</b> . For example, <b>FSx for
+Windows File Server</b> is ideal for enterprise applications needing
+Windows-compatible file systems.</li><li>HTTP or REST APIs are used to interact with <b>Amazon S3</b> object storage, which is ideal for web-based applications, mobile
+apps, and data lakes.</li><li><b>Scalability and Durability</b> :</li><li><b>Amazon S3</b> provides unlimited scalability and unmatched
+durability, making it the go-to choice for long-term storage of
+large datasets.</li><li>File systems like <b>EFS</b> offer automatic scaling as workloads
+increase or decrease, while <b>EBS</b> scales by manually
+attaching additional volumes to EC2 instances.</li><li><b>Cost Considerations</b> :</li><li><b>Amazon S3</b> is one of the most cost-effective solutions for
+storing massive amounts of unstructured data, while <b>S3
+Glacier</b> further reduces costs for long-term archival.</li><li>For active workloads requiring constant data interaction,<b>EFS</b> and <b>FSx</b> offer cost-effective options compared
+to setting up custom file-sharing systems.</li></ol><h2 data-label="wrap-up" class="ltx_title_subsection">Wrap up</h2><div>In conclusion, selecting the correct AWS storage solution is contingent
+upon understanding the application’s requirements in terms of
+performance, scalability, and supported access protocols. The<b>Storage Pattern Decision Matrix</b> serves as a guide to identify
+which AWS service aligns best with specific needs—whether it is
+blocking storage through <b>Amazon EBS</b> , file storage with<b>EFS/FSx</b> , or object storage via <b>Amazon S3</b> . By choosing
+the right storage type, organizations can optimize performance, control
+costs, and scale effectively within the AWS environment.</div>
